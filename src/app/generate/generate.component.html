@@ -1,4 +1,23 @@
-<ion-item>
-  <ion-icon name="alert-circle-outline"></ion-icon>
-  Método não implementado
-</ion-item>
+<ion-card [hidden]="scanActive">
+  <ion-card-header>
+    <ion-card-title>Gerar QR Code</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-input type="text" placeholder="Informe o conteúdo desejado" [(ngModel)]="conteudo"></ion-input>
+    <ion-button (click)="generate()" expand="block" fill="solid">
+      <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+      Gerar
+    </ion-button>
+  </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="showQR">
+  <ion-card-header>
+    <ion-card-title>QR Code</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{this.conteudo}}" id="generated-qr" alt="QR Code Gerado">
+  </ion-card-content>
+</ion-card>
