@@ -1,20 +1,21 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" [hidden]="scanActive">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Barcode Scanner</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [style.--background]="scanActive ? '#00000000' : '#fff'">
+  <ion-toolbar *ngIf="!scanActive">
+    <ion-segment (ionChange)="segmentChanged($event)" value="scan">
+      <ion-segment-button value="scan">
+        Scanner
+      </ion-segment-button>
+      <ion-segment-button value="generate">
+        Gerar QRCode
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <app-scanner *ngIf="segmentActive == 'scan'" (scanActiveEmitter)='changeStatus($event)'></app-scanner>
+  <app-generate *ngIf="segmentActive == 'generate'"></app-generate>
 </ion-content>

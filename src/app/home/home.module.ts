@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { ScannerComponent } from '../scanner/scanner.component';
+import { GenerateComponent } from '../generate/generate.component';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 
 @NgModule({
@@ -14,6 +17,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, ScannerComponent, GenerateComponent],
+  providers: [Clipboard]
 })
 export class HomePageModule {}

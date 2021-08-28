@@ -1,0 +1,26 @@
+<ion-button (click)="startScanner()" expand="block" [hidden]="scanActive" fill="solid">
+  <ion-icon slot="start" name="scan"></ion-icon> Iniciar scanner
+</ion-button>
+
+<ion-row [hidden]="!scanActive" class="scanner-buttons">
+  <ion-col class="ion-no-padding">
+    <ion-button (click)="stopScanner()" expand="block" fill="solid">Parar scanner</ion-button>
+  </ion-col>
+</ion-row>
+
+<div class="scan-box" [hidden]="!scanActive"></div>
+
+<ion-card [hidden]="scanActive">
+  <ion-card-header>
+    <ion-card-title *ngIf="results.length > 0">Resultados</ion-card-title>
+    <ion-card-title *ngIf="results.length == 0">Nenhum resultado encontrado</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item *ngFor="let r of results">
+      {{ r }} 
+      <ion-icon (click)="copyItem(r)" name="clipboard-outline" slot="end"></ion-icon>
+      <ion-icon (click)="removeItem(r)" name="close-circle-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-card-content>
+</ion-card>

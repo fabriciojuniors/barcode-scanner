@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ScannerComponent } from './scanner/scanner.component';
 
 @NgModule({
   declarations: [AppComponent],
