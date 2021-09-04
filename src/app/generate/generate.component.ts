@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 
 @Component({
@@ -76,10 +77,12 @@ export class GenerateComponent implements OnInit {
 
   async downloadQR() {
     let base64 = await this.readAsBase64();
-    this.base64ToGallery.base64ToGallery(base64.split(",")[1], { prefix: '_img', mediaScanner: true }).then(
-      res => this.presentToast("QRCode salvo com sucesso!" + res),
-      err => this.presentToast("Erro ao salvar QRCode. " + err)
-    );
+    await Filesystem.writeFile({
+      path: 'qrcode.png',
+      data: base64,
+      directory: Directory.Documents
+    })
+    this.presentToast("QRCode salvo com sucesso!")
   }
 
   private async readAsBase64() {
