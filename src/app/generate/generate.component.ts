@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
@@ -19,7 +19,8 @@ export class GenerateComponent implements OnInit {
   constructor(private alertController: AlertController,
     private toastController: ToastController,
     private base64ToGallery: Base64ToGallery,
-    private androidPermissions: AndroidPermissions) { }
+    private androidPermissions: AndroidPermissions,
+    private loadingController : LoadingController) { }
 
   async presentAlert(title, msg) {
     const alert = await this.alertController.create({
@@ -40,6 +41,18 @@ export class GenerateComponent implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  async presentLoading(msg) {
+    const loading = await this.loadingController.create({
+      message: msg,
+    });
+    await loading.present();
+    console.log('Loading dismissed!');
+  }
+
+  dismissLoading(){
+    this.loadingController.dismiss();
   }
 
   ngOnInit() {
@@ -76,12 +89,14 @@ export class GenerateComponent implements OnInit {
   }
 
   async downloadQR() {
+    this.presentLoading("Salvando QRCode");
     let base64 = await this.readAsBase64();
     await Filesystem.writeFile({
       path: 'qrcode.png',
       data: base64,
       directory: Directory.Documents
     })
+    this.dismissLoading();
     this.presentToast("QRCode salvo com sucesso!")
   }
 
