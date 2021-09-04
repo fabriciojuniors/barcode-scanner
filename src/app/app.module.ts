@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ScannerComponent } from './scanner/scanner.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Base64ToGallery],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

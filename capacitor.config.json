@@ -2,5 +2,10 @@
 	"appId": "io.ionic.starter",
 	"appName": "Barcode Scanner by Junior",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"PushNotifications": {
+		  "presentationOptions": ["badge", "sound", "alert"]
+		}
+	}
 }

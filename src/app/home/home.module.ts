@@ -8,6 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { ScannerComponent } from '../scanner/scanner.component';
 import { GenerateComponent } from '../generate/generate.component';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 
 @NgModule({
@@ -18,6 +20,6 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     HomePageRoutingModule
   ],
   declarations: [HomePage, ScannerComponent, GenerateComponent],
-  providers: [Clipboard]
+  providers: [Clipboard, Base64ToGallery, AndroidPermissions]
 })
 export class HomePageModule {}
